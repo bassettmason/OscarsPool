@@ -2,9 +2,9 @@ import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import HomeScreen from '../screens/homeScreen';
-import NotificationsScreen from '../screens/notificationsScreen';
+import Pool from '../screens/pool';
 import ProfileScreen from '../screens/profileScreen';
-import SettingsScreen from '../screens/settingsScreen';
+import Categories from '../screens/categories';
 
 const Stack = createStackNavigator();
 
@@ -13,9 +13,9 @@ export default function MyStack() {
     <NavigationContainer>
         <Stack.Navigator>
             <Stack.Screen name="Home" component={HomeScreen}/>
-            <Stack.Screen name="Notifications" component={NotificationsScreen}/>
+            <Stack.Screen name="Pool" component={Pool}/>
             <Stack.Screen name="Profile" component={ProfileScreen} />
-            <Stack.Screen name="Settings" component={SettingsScreen} />
+            <Stack.Screen name="Categories" component={Categories} />
         </Stack.Navigator>
     </NavigationContainer>
   );
