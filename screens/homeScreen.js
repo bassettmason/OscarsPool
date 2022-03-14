@@ -2,13 +2,25 @@ import * as React from 'react';
 import { StyleSheet, Button, View, FlatList, TouchableOpacity, Text } from 'react-native';
 import { globalStyles } from '../styles/global';
 import Card from '../shared/card';
-export default function HomeScreen({ navigation }) {
+import { useNavigation } from '@react-navigation/core'
+import { auth } from '../firebase'
 
+export default function HomeScreen() {
+  const navigation = useNavigation();
   const [pools, setPools] = React.useState([
     { title: 'Friends Pool', rating: 5, body: 'lorem ipsum', key: '1' },
     { title: 'Family Pool', rating: 4, body: 'lorem ipsum', key: '2' },
     { title: 'Work Pool', rating: 3, body: 'lorem ipsum', key: '3' },
   ]);
+
+  const handleSignOut = () => {
+    auth
+      .signOut()
+      .then(() => {
+        navigation.replace("Login")
+      })
+      .catch(error => alert(error.message))
+  }
 
   return (
     <View style={globalStyles.container}>
@@ -22,8 +34,8 @@ export default function HomeScreen({ navigation }) {
     
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-end' }}>
         <Button
-          title="Go to Profile"
-          onPress={() => navigation.navigate('Profile')}
+          title={"logout " + auth.currentUser?.email}
+          onPress={handleSignOut}
         />
       </View>
     </View>

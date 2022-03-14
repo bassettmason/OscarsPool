@@ -2,9 +2,9 @@ import * as React from 'react';
 import { StyleSheet, Button, View, FlatList, TouchableOpacity, Text } from 'react-native';
 import { globalStyles } from '../styles/global';
 import Card from '../shared/card';
-
-export default function Categories({ navigation }) {
-
+import { useNavigation } from '@react-navigation/core'
+export default function Categories() {
+  const navigation = useNavigation();
   const [categories, setCategories] = React.useState(null);
   const getMoviesFromApiAsync = async () => {
     try {
