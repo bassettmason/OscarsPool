@@ -2,9 +2,10 @@ import * as React from 'react';
 import { StyleSheet, Button, View, FlatList, TouchableOpacity, Text } from 'react-native';
 import { globalStyles } from '../styles/global';
 import Card from '../shared/card';
+import { useNavigation } from '@react-navigation/core'
 
-export default function Pool({ navigation }) {
-
+export default function Pool() {
+  const navigation = useNavigation();
   const [users, setUsers] = React.useState([
     { title: 'Mason Bassett', rating: 5, body: 'lorem ipsum', key: '1' },
     { title: 'Maria Rivera', rating: 4, body: 'lorem ipsum', key: '2' },
