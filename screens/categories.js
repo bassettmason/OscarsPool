@@ -5,25 +5,31 @@ import Card from '../shared/card';
 
 export default function Categories({ navigation }) {
 
-  const [categories, setCategories] = React.useState([]);
+  const [categories, setCategories] = React.useState(null);
   const getMoviesFromApiAsync = async () => {
     try {
       const response = await fetch(
         'https://Oscars-Pool-App.masonp00pyd.repl.co//api/getcategorylist'
       );
       const json = await response.json();
-      return json.categories;
+      setCategories(json.categories)
+      return json;
     } catch (error) {
-      console.error(error);
+      alert(error);
     }
   };
-  setCategories(getMoviesFromApiAsync());
+  if (categories === null) {
+    getMoviesFromApiAsync();
+  } else {
+    console.log("categories found")
+  }
+  
   return (
     <View style={globalStyles.container}>
       <FlatList data={categories} renderItem={({ item }) => (
         <TouchableOpacity onPress={() => navigation.navigate('Nominees', item)}>
           <Card>
-            <Text style={globalStyles.titleText}>{ item.category }</Text>
+            <Text style={globalStyles.titleText}>{ item.title }</Text>
           </Card>
         </TouchableOpacity>
       )} />
