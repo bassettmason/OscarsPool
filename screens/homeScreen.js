@@ -3,7 +3,8 @@ import { StyleSheet, Button, View, FlatList, TouchableOpacity, Text } from 'reac
 import { globalStyles } from '../styles/global';
 import Card from '../shared/card';
 import { useNavigation } from '@react-navigation/core'
-import { auth } from '../firebase'
+import { auth, db } from '../firebase'
+import { collection, doc, addDoc, getDoc } from 'firebase/firestore/lite';
 
 export default function HomeScreen() {
   const navigation = useNavigation();
@@ -12,7 +13,19 @@ export default function HomeScreen() {
     { title: 'Family Pool', rating: 4, body: 'lorem ipsum', key: '2' },
     { title: 'Work Pool', rating: 3, body: 'lorem ipsum', key: '3' },
   ]);
+  const getPools = async ()=>{
+    const userRef = doc(db, "users", auth.currentUser.uid);
+    const userSnap = await getDoc(userRef);
+    if (userSnap.exists()) {
+      setPools(userSnap.data().pools);
+    } else {
+      // doc.data() will be undefined in this case
+      console.log("No such document!");
+    }
+  }
 
+  getPools()
+  
   const handleSignOut = () => {
     auth
       .signOut()
