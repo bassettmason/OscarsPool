@@ -19,8 +19,11 @@ export default function HomeScreen() {
       .then(() => {
         navigation.replace("Login")
       })
-      .catch(error => alert(error.message))
-  }
+      .catch(error => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        alert(errorMessage)
+      });   }
 
   return (
     <View style={globalStyles.container}>
