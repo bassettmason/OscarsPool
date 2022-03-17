@@ -3,6 +3,7 @@ import { StyleSheet, Button, View, FlatList, TouchableOpacity, Text } from 'reac
 import { globalStyles } from '../styles/global';
 import Card from '../shared/card';
 import { useNavigation } from '@react-navigation/core'
+
 export default function Categories() {
   const navigation = useNavigation();
   const [categories, setCategories] = React.useState(null);
